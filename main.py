@@ -1,25 +1,25 @@
-#RechnenMaschine
-def Add(a, b):
-  print(a+b)
-def sub(a, b):
-  print(a-b)
-def div(a, b):
-  print(a/b)
-def mul(a, b):
-  print(a*b)
+def kreis (r):
+  pi=3.14
+  print("Umfang: " + str(2*pi*r))
 
-operator=input("Operation: +, -, *, /")
-while True:
- a=float(input("Eine Zahl:"))
- b=float(input("Zweite Zahl:"))
- if operator=="+":
-  print("Sonuç:", a+b)
- elif operator=="-":
-  print("Sonuç:", a-b)
- elif operator=="*":
-  print("Sonuç:", a*b)
- elif operator=="/":
-  print("Sonuç:", a/b)
- else:
-   print("geçerli işlem değil")
-   break
+def kreis_flache(r):
+   pi=3.14
+   print("Flache: " + str(pi*r*r))
+
+def  zylinder_volumen(r,h):
+   pi=3.14
+   print("Flache: "+ str(pi*r*r*h))
+
+print("Was möchten Sie? ")
+f=int(input("1.Umfang 2.Flache 3.Zylinder"))
+
+if f==1:
+  r=float(input("Radius: "))
+  kreis(r)
+elif f==2:
+  r=float(input("Radius: "))
+  kreis_flache(r)
+else:
+  r=float(input("Radius: "))
+  h=float(input("Heigh: "))
+  zylinder_volumen(r,h)
