@@ -1,2 +1,5 @@
-kelime=input("Kelime girin:")
-print(len(kelime))
+tuple1 = ("a", "b" , "c")
+a=int(input("birinci not"))
+b=int(input("ikinci not"))
+c=int(input("üçüncü not"))
+print(a+b+c/3)
