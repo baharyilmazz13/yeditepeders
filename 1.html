@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Menu</title>
+</head>
+<body>
+    <style>
+        .menu-item img {
+    width: 200px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+}
+    </style>
+<body style="background-color: rgb(229, 162, 227); text-align:center; font-size: 20px;"></body>
+<h1 id="logo" style="color:blueviolet;">Robot Menu</h1>
+<button>Sepetim</button>
+<button onclick="yemeklerilistele()" style="color:rgb(144, 33, 103); font-size:30px; padding:10px 20px; text-align:center;">Yemekler</button>
+<button onclick="iceceklerilistele()" style="color:rgb(144, 33, 103); font-size:30px; padding:10px 20px; text-align:center;">İçecekler</button>
+<button onclick="tatlilarilistele()" style="color:rgb(144, 33, 103); font-size:30px; padding:10px 20px; text-align:center;">Tatlılar</button>
+    <div id="icerik"></div>
+    <img src="robot.jpg" alt="resim">
+
+    <script>
+        function yemeklerilistele() {
+            const yemekler = [
+                { isim: "Makarna", fiyat: 250, resim: "makarna.jpg" },
+                { isim: "Pizza", fiyat: 300, resim: "pizza.jpg" },
+                { isim: "Hamburger", fiyat: 320, resim: "hamburger.webp" },
+                { isim: "Tavuk Wrap", fiyat: 270, resim: "tavukwrap.jpg" },
+                { isim: "Et Wrap", fiyat: 320, resim: "etliwrap.jpg" }
+            ];
+
+            const icerikDiv = document.getElementById("icerik");
+            icerikDiv.innerHTML = ""; 
+
+            yemekler.forEach(yemek => {
+                const item = document.createElement("div");
+                item.className = "menu-item";
+                item.innerHTML = `
+                    <img src="${yemek.resim}" alt="${yemek.isim}">
+                    <p>${yemek.isim} - ${yemek.fiyat} TL</p>
+                `;
+                icerikDiv.appendChild(item);
+            });
+        }
+
+        function iceceklerilistele() {
+           const icecekler=[
+             {isim: "Kola", fiyat: 50, resim:"kola.jpg"},
+             {isim: "Ayran", fiyat: 30, resim:"ayran.webp"},
+             {isim: "Meyve Suyu", fiyat: 40, resim:"meyvesuyu.jpeg"}
+           ];
+            const icerikDiv = document.getElementById("icerik");
+            icerikDiv.innerHTML = ""; 
+
+           icecekler.forEach(icecek => {
+                const item = document.createElement("div");
+                item.className = "menu-item";
+                item.innerHTML = `
+                    <img src="${icecek.resim}" alt="${icecek.isim}">
+                    <p>${icecek.isim} - ${icecek.fiyat} TL</p>
+                `;
+                icerikDiv.appendChild(item);
+            });
+        }
+        
+
+        function tatlilarilistele() {
+            const tatlilar=[
+            {isim: "Baklava", fiyat: 100, resim:"baklava.jpg"},
+            {isim: "Sütlaç", fiyat: 70, resim:"sütlaç.jpg"},
+            {isim: "Kazandibi", fiyat: 80, resim:"kazandibi.jpg"},
+            ]
+             const icerikDiv = document.getElementById("icerik");
+            icerikDiv.innerHTML = ""; 
+
+           tatlilar.forEach(tatli => {
+                const item = document.createElement("div");
+                item.className = "menu-item";
+                item.innerHTML = `
+                    <img src="${tatli.resim}" alt="${tatli.isim}">
+                    <p>${tatli.isim} - ${tatli.fiyat} TL</p>
+                `;
+                icerikDiv.appendChild(item);
+            });
+        }
+        
+</script>
+</body>
+</html>
