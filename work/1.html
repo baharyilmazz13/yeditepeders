@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mein Blog</title>
+    <img src="resim.JPEG" alt="Mein Foto">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #ffe6f0, #e0f7fa);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            transition: background-color 0.5s, color 0.5s;
+        }
+
+        .gece {
+            background: linear-gradient(135deg, #1c1c1c, #3a3a3a);
+            color: #f0f0f0;
+        }
+
+        #temaBtn {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 999;
+            padding: 10px 15px;
+            background-color: white;
+            border: 2px solid #555;
+            border-radius: 20px;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: 0.3s;
+        }
+
+        #temaBtn:hover {
+            background-color: #f0f0f0;
+        }
+
+        nav {
+            background-color: white;
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            padding: 20px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        nav a {
+            text-decoration: none;
+            font-weight: bold;
+            color: #e91e63;
+            font-size: 18px;
+            transition: 0.3s;
+        }
+
+        nav a:hover {
+            color: #ad1457;
+        }
+
+        .giris {
+            text-align: center;
+            margin-top: 150px;
+        }
+
+        input[type="text"] {
+            padding: 12px;
+            width: 250px;
+            border: 2px solid #e64498;
+            border-radius: 10px;
+            color: #e64498;
+            font-size: 16px;
+            box-shadow: inset 1px 1px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        textarea {
+            width: 300px;
+            height: 100px;
+            margin-top: 10px;
+            display: block;
+            border-radius: 10px;
+            padding: 10px;
+            border: 2px solid #e64498;
+        }
+
+        button {
+            padding: 12px 20px;
+            background-color: white;
+            color: #e64498;
+            border: 2px solid #e64498;
+            border-radius: 10px;
+            font-size: 16px;
+            margin: 10px;
+            cursor: pointer;
+            box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+            transition: transform 0.2s;
+        }
+
+        button:hover {
+            transform: scale(1.05);
+        }
+
+        #mesaj {
+            margin-top: 30px;
+            font-size: 24px;
+            font-weight: bold;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .yazi,
+        .hakkim {
+            border: 1px solid pink;
+            padding: 10px;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 2px 2px 10px rgba(230, 100, 152, 0.2);
+        }
+
+        section {
+            padding: 20px;
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 40px;
+            padding: 20px;
+            background-color: #fce4ec;
+        }
+
+        footer a {
+            margin: 0 10px;
+            text-decoration: none;
+            color: #e91e63;
+        }
+
+        img {
+            width: 100px;
+            margin: 20px auto;
+            display: block;
+            border-radius: 50%;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        }
+
+        #uber-mich {
+            padding: 40px;
+            background: 40px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        #uber-mich h2 {
+            text-align: center;
+            font-size: center;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .timeline {
+            position: relative;
+            max-width: 800px;
+            margin: auto;
+            padding-left: 20px;
+            border-left: 4px solid #e468aa;
+        }
+
+        .timeline-item {
+            margin: 20px 0px;
+            position: relative;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            top: 8px;
+            left: -10px;
+            width: 20px;
+            height: 20px;
+            background: #e468aa;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 0 0 4px #e468aa33;
+        }
+
+        .timeline-date {
+            font-weight: bold;
+            color: #e468aa;
+            margin-bottom: 5px;
+        }
+
+        .timeline-content {
+            background: white;
+            padding: 15px 20px;
+            border-radius: 10px;
+            box-shadow: 0 2px 8 px rgba(0, 0, 0, 0.1);
+        }
+
+        .timeline-content h3 {
+            margin-top: 0;
+            font-size: 20px;
+            color: #333;
+        }
+
+        .timeline-content p {
+            color: #555;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="temaBtn" onclick="temaDegistir()">🌙 / ☀️</button>
+
+    <nav>
+        <a href="#hakkimda">Über mich</a>
+        <a href="#hobiler">Hobbies</a>
+        <a href="#yazilar">Letzte Beiträge</a>
+        <a href="#iletisim">Kontakt</a>
+        <a href="#websitesi"
+            onclick="ysYonlendir('uyari','file:///C:/Users/%C4%B0hya%20Enerji/Desktop/me/java%20kodlar/java/1.html', 10)">Erste
+            eigene Website</a>
+        <a href="#projeler">Projekte</a>
+    </nav>
+    <div class="giris">
+        <input type="text" id="txtAd" placeholder="Ihren Name bitte.">
+        <button id="btn">Klicken ^_^</button>
+        <div id="mesaj"></div>
+    </div>
+
+    <section id="hakkimda">
+        <div class="hakkim">
+            <h2>Über mich</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-date">2004</div>
+                    <div class="timeline-content">
+                        <h3>Geboren</h3>
+                        <p>Ich wurde in der Türkei geboren und wuchs mit einer großen Neugier für Technik auf.</p>
+                        <h3>Kontaktinformationen</h3>
+                        <ul class="info-liste">
+                            <li><strong>📧 E-Mail:</strong> bahar.yilmaz2@std.yeditepe.edu.tr</li>
+                            <li><strong>📍 Standort:</strong> Istanbul, Türkei</li>
+                            <li><strong>🌐 Website:</strong> www.bahar-blog.com</li>
+                        </ul>
+                        <h3>Sprachen</h3>
+                        <ul class="info-liste">
+                            <li><strong>🇹🇷 Türkisch</strong> – Muttersprache</li>
+                            <li><strong>🇩🇪 Deutsch</strong> – B1 Niveau</li>
+                            <li><strong>🇬🇧 Englisch</strong> – B1 Niveau</li>
+                        </ul>
+                        <h3>Fæhigkeiten</h3>
+                        <ul class="info-liste">
+                            <li>🔐 Netzwerksicherheit</li>
+                            <li>🌐 HTML, CSS, JavaScript, Python</li>
+                            <li>🛠️ Troubleshooting & Analyse</li>
+                            <li>🎨 Webdesign</li>
+                        </ul>
+                        <h3>Ausbildung</h3>
+                        <ul class="info-liste">
+                            <li><strong>2022-heute:</strong> Yeditepe Universitæt - Internet und Netzwerk Technologien</li>
+                            <li><strong>2018-2022:</strong> Gymnasium</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="hobiler">
+                    <div class="timeline-content">
+                        <h3>Meine Hobbies</h3>
+                        <ul class="hobby-liste">
+                            <li>📚<span>Lesen</span></li>
+                            <li>✏️<span>Zeichnen</span></li>
+                            <li>💻<span>Webdesign</span></li>
+                            <li>🌍<span>Sprachen lernen</span></li>
+                            <li>🚶‍♀️<span>Spazieren gehen</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2022</div>
+                <div class="timeline-content">
+                    <h3>Studium begonnen</h3>
+                    <p>Ich habe mein Studium an der Yeditepe Universitæt im Bereich Internet und Netzwerk Technologien
+                        begonnen. Ich habe Deutsch gelernt.</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2023</div>
+                <div class="timeline-content">
+                    <h3>Erstes Webprojekt</h3>
+                    <p>Ich habe meine erste eigene Webseite gestaltet und mich in Webdesign verliebt. Sie können
+                        <strong> meine erste eigene Website</strong>sehen.
+                    </p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-date">2025</div>
+                <div class="timeline-content">
+                    <h3>Mein Blog</h3>
+                    <p>Ich habe diesen Blog gestarted, um meine Reise, Interessen und Projekte zu teilen. </p>
+                </div>
+            </div>
+            <p>Ich bin <strong>Bahar Yılmaz</strong>, und das ist mein persönlicher Blog über Technologie, Kunst und mein
+                Alltag!</p>
+            <p>Ich bin jetzt 21 Jahre alt und studiere Internet und Netzwerk Technologie an der Yeditepe Universität.
+            </p>
+            <p>Ich interessiere mich für Netzwerk, Cyber-Security, Webdesign und mehr!</p>
+            <p>Willkommen in meiner kleinen digitalen Welt ✨</p>
+        </div>
+    </section>
+
+    <section id="yazilar">
+        <h2>Letzte Beiträge</h2>
+        <div class="yazi">
+            <h3>Mein erster Blogeintrag</h3>
+            <p>Heute beginne ich mit meinem eigenen Blog. Ich bin aufgeregt!</p>
+        </div>
+        <div class="yazi">
+            <h3>Technologie & Ich</h3>
+            <p>Ich interessiere mich sehr für Webentwicklung, Cyber-Security und KI.</p>
+        </div>
+    </section>
+    <section id="websitesi" class="section">
+        <h2>Erste eigene Website</h2>
+        <div id="uyari">Wenn Sie darauf klicken, wird die Weiterleitung hier angezeigt...</div>
+    </section>
+
+    <section id="iletisim">
+        <h2>Kontakt</h2>
+        <input type="text" placeholder="Ihre E-Mail">
+        <textarea placeholder="Ihre Nachricht"></textarea>
+        <button>Absenden</button>
+    </section>
+    <section id="projekte" class="section">
+        <h2>Meine Projekte</h2>
+        <div class="yazi">
+            <h3>Mobile App für ToDo-Listen</h3>
+            <p>Ich habe eine ToDo-App mit React Native entwickelt.</p>
+            <p>Mein erster Versuch, eine eigene Portfolioseite zu gestalten.</p>
+        </div>
+    </section>
+
+
+
+    <footer>
+        <p>Folgen Sie mir:</p>
+        <a href="https://instagram.com">Instagram</a>
+        <a href="https://github.com">GitHub</a>
+    </footer>
+    <script>
+        function ysYonlendir(ID, adres, saniye) {
+            if (saniye === 0) {
+                window.location.href = adres;
+                return;
+            }
+            document.getElementById(ID).innerHTML = saniye + " Sie werden in wenigen Sekunden weitergeleitet.  Ich hoffe, dass Sie es mögen! Ich weiß nicht so gut, aber um den Gipfel zu erreichen, muss man ganz unten beginnen. ";
+            saniye--;
+            setTimeout(function () {
+                ysYonlendir(ID, adres, saniye);
+            }, 1000);
+        }
+    </script>
+
+    <script>
+        document.getElementById("btn").onclick = function () {
+            var ad = document.getElementById("txtAd").value;
+            if (ad) {
+                alert("Hallo, " + ad + "! Willkommen in meinem Blog!");
+                document.getElementById("txtAd").style.display = "none";
+                document.getElementById("btn").style.display = "none";
+                document.getElementById("mesaj").textContent = "Willkommen, " + ad + "!";
+            } else {
+                alert("Bitte geben Sie Ihren Namen ein.");
+            }
+        };
+
+        function temaDegistir() {
+            document.body.classList.toggle("gece");
+        }
+    </script>
+</body>
+
+</html>
