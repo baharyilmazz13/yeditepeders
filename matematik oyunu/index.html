@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="tr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matematik Bitki Oyunu</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <h1>🌱Matematik Bitki Oyunu🌱</h1>
+
+    <div class="oyunKutusu">
+
+        <div class="soru-kutusu">
+            <p id="soru">Soru yükleniyor..</p>
+
+            <input type="number" id="cevapKutusu" placeholder="Cevabın">
+            <button id="btn">Gönder</button>
+        </div>
+
+        <div class="bitkiAlani">
+            <div id="cicek" class="cicek level0">🌱</div>
+            <p id="levelAlani">Seviye: 0/10</p>
+        </div>
+
+        <div class="eylemler">
+            <button id="btnSu" class="hide">💧 Su Ver</button>
+            <button id="btnGunes" class="hide">☀️ Güneş Ver</button>
+        </div>
+
+        <p id="message"></p>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
