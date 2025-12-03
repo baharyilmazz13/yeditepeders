@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Evcil Hayvan Görev Oyunu</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <style>
+        body {
+            font-family: 'Press Start 2P', cursive, Arial;
+            background-image: url(background.jpg);
+            background-size: cover;
+            background-repeat: no-repeat;
+            padding: 20px;
+            text-align: center;
+            border: 2px solid black;
+            border-radius: 40px;
+            text-align: center;
+            width: 375px;
+            height: 667px;
+            margin: 30px auto;
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: hidden;
+        }
+        #h1{
+            top:70px;
+
+        }
+
+        #gorevListesi li button.sil {
+            background-color: rgb(222, 222, 62);
+            /* sarı */
+            color: black;
+            font-weight: bold;
+            border: 2px solid rgb(222, 222, 62);
+            border-radius: 20px;
+            padding: 5px 10px;
+            width: auto;
+            /* küçük kare değil, yazı gibi */
+            height: auto;
+            font-size: 10px;
+            top: auto;
+            right: auto;
+            position: static;
+            /* li içinde normal konumda */
+            margin-left: 5px;
+        }
+
+        nav {
+            position: absolute;
+            /* Sayfanın konumuna göre sabitle */
+            top: 110px;
+            /* Üstten 20px boşluk */
+            right: 8px;
+            /* Sağdan 20px boşluk */
+            display: flex;
+            flex-direction: column;
+            /* Butonları alt alta sırala */
+            gap: 10px;
+            /* Butonlar arası boşluk */
+        }
+
+        nav button {
+            padding: 10px 20px;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            background-color:#ffeaa7;
+            border: 2px solid #fdcb6e;
+        }
+
+        nav button:hover {
+            background-color: #ddd;
+        }
+
+        .sekme {
+            display: none;
+        }
+
+        .sekme.aktif {
+            display: block;
+        }
+
+        #gorevListesi li button.tamamla {
+            background-color: #00b894;
+            color: white;
+            border-radius: 20px;
+            padding: 5px 10px;
+            margin-left: 5px;
+            position: static;
+        }
+
+        #puanAlanı {
+            position: fixed;
+            top: 70px;
+            right: 5px;
+            background-color: #ffeaa7;
+            color: #2d3436;
+            padding: 10px;
+            border: 2px solid #fdcb6e;
+            border-radius: 10px;
+            font-size: 10px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+
+        #gorevListesi {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        #gorevListesi li {
+            width: 120px;
+            height: 35px;
+            margin: 5px;
+            background-color: #74b9ff;
+            color: #fff;
+            border: 2px solid #0984e3;
+            border-radius: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            font-size: 12px;
+            font-family: 'Press Start 2P', cursive;
+            cursor: pointer;
+            box-shadow: 2px 2px #0984e3;
+        }
+
+        #gorevListesi li button {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            width: 25px;
+            height: 25px;
+            font-size: 10px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+            color: #fff;
+        }
+
+        #gorevListesi li button.sil {
+            background-color: #d63031;
+            /* Silme */
+        }
+
+        #gorevListesi li button.tamamla {
+            background-color: #00b894;
+            /* Tamamla */
+        }
+
+        input {
+            text-align: center;
+            border: 2px solid rgb(44, 118, 191);
+            border-radius: 20px;
+            padding: 15px;
+            justify-content: center;
+            font-weight: bold;
+            color: black;
+            background-color: rgb(106, 168, 231);
+
+        }
+
+        button {
+            background-color: rgb(222, 222, 62);
+            color: black;
+            font-weight: bold;
+            border: 2px solid rgb(222, 222, 62);
+            border-radius: 20px;
+            padding: 10px;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #saatAlanı {
+            position: fixed;
+            top: 60px;
+            text-align: center;
+            left: 130px;
+            background-color: #99d9f5;
+            color: #2d3436;
+            padding: 10px 10px;
+            border: 2px solid #214f63;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: bold;
+            z-index: 1000;
+        }
+    </style>
+    <h1>Evcil hayvan oyunu</h1>
+    <nav>
+        <button onclick="sekmeGoster('oyun')">Oyun</button>
+        <button onclick="sekmeGoster('magaza')">Mağaza</button>
+    </nav>
+    <div id="puanAlanı">Puan: <span id="puan">0</span></div>
+    <div id="oyun" class="sekme aktif">
+        <div id="evcilhayvanAlanı">
+            <h2>Evcil hayvanın</h2>
+            <img id="evcilHayvan" src="cat.png" alt="Evcil Hayvan" width="150">
+        </div>
+
+        <div id="gorevEkleme">
+            <input type="text" id="gorevInput" placeholder="Yeni görev ekle">
+            <button onclick="gorevEkle()">Ekle</button>
+
+            <ul id="gorevListesi"></ul>
+        </div>
+        <div id="kıyafetler"></div>
+        <div id="yemekler"></div>
+    </div>
+    <div id="magaza" class="sekme hidden">
+    </div>
+    <div id="saatAlanı"><span id="saat"></span></div>
+
+    </div>
+
+    <script>
+        let puan = 0;
+        const input = document.getElementById('gorevInput');
+        const gorevListesi = document.getElementById('gorevListesi');
+        const puanSpan = document.getElementById('puan');
+
+        function gorevEkle() {
+            const gorev = input.value.trim();
+            if (!gorev) return;
+
+            const li = document.createElement('li');
+
+            // Görev yazısı
+            const span = document.createElement('span');
+            span.textContent = gorev;
+            li.appendChild(span);
+
+
+            // Silme butonu
+            const silBtn = document.createElement('button');
+            silBtn.className = 'sil';
+            silBtn.type = 'button';
+            silBtn.textContent = "X";
+            silBtn.onclick = function () {
+                li.remove();
+            };
+            li.appendChild(silBtn);
+
+            // Tamamla butonu
+            const tamamlaBtn = document.createElement('button');
+            tamamlaBtn.textContent = "✓";
+            tamamlaBtn.className = "tamamla";
+            tamamlaBtn.onclick = function () {
+                puan += 5;
+                puanSpan.textContent = puan;
+                li.style.textDecoration = "line-through";
+                li.style.backgroundColor = "#00b894";
+            };
+            li.appendChild(tamamlaBtn);
+
+            // Listeye ekle
+            gorevListesi.appendChild(li);
+
+            input.value = "";
+        }
+
+        function urunAl(tur, fiyat) {
+            if (puan < fiyat) {
+                alert("Yeterli puanın yok!");
+                return;
+            }
+            puan -= fiyat;
+            puanSpan.textContent = puan;
+
+            const alan = tur === 'yemek' ? 'yemekler' : 'kıyafetler';
+            const div = document.getElementById(alan);
+            const urun = document.createElement('div');
+            urun.textContent = tur === 'yemek' ? "🍗" : "🎩";
+            div.appendChild(urun);
+        }
+        function sekmeGoster(ad) {
+            document.querySelectorAll('.sekme').forEach(function (sekme) {
+                sekme.classList.remove('aktif');
+            });
+
+            document.getElementById(ad).classList.add('aktif');
+        }
+        
+        // Sayfa yüklendiğinde evcil hayvan bilgilerini al ve göster
+        window.onload = function () {
+            const isim = localStorage.getItem("hayvanIsmi");
+            const resim = localStorage.getItem("hayvanResmi");
+
+            if (isim && resim) {
+                // Hayvanın resmini güncelle
+                const img = document.getElementById("evcilHayvan");
+                img.src = resim;
+
+                // Hayvanın ismini yaz (İstersen bir yere daha ekleyebilirsin)
+                const isimBaslik = document.createElement("h3");
+                isimBaslik.textContent = `Adım: ${isim}`;
+                document.getElementById("evcilhayvanAlanı").prepend(isimBaslik);
+            }
+        };
+        function saatiGuncelle() {
+            const saatSpan = document.getElementById('saat');
+            const simdi = new Date();
+            const saat = simdi.getHours().toString().padStart(2, '0');
+            const dakika = simdi.getMinutes().toString().padStart(2, '0');
+            saatSpan.textContent = `${saat}:${dakika}`;
+        }
+        saatiGuncelle();
+        setInterval(saatiGuncelle, 1000);
+
+    </script>
+</body>
+
+</html>
